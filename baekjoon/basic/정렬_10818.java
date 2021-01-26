@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.io.*;
 
-public class Main {
-
+public class 정렬_10818 {
+	//ArrayList활용(Collections의 종류)
 	public static void main(String[] args) throws IOException {
 		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(System.out));
