@@ -11,7 +11,7 @@ public class ЦђБе_4344 {
 		StringTokenizer st;
 		for (int i=0;i<n;i++) {
 			st=new StringTokenizer(br.readLine());
-			float sum=0;
+			int sum=0;
 			int t=Integer.parseInt(st.nextToken());
 			ArrayList<Integer> m=new ArrayList<>();
 			for (int j=0;j<t;j++) {
@@ -19,7 +19,7 @@ public class ЦђБе_4344 {
 				sum+=temp;
 				m.add(temp);				
 			}
-			float mean=sum/(float)t;
+			float mean=(float)sum/t;
 			int ans=0;
 			for (int z:m) {
 				if (z>mean) ans++;
