@@ -3,11 +3,11 @@ public class exam {
 		Student jb=new Student("준범",30,new have(true));
 		Student ch=jb.clone();
 		System.out.println(jb==ch);
-		System.out.println(jb.y.yes.hashCode());
-		jb.y.yes=false;
-		System.out.println(jb.y.yes.hashCode());
+		System.out.println(jb.y.yes==ch.y.yes);
 		jb.y.yes=true;
-		System.out.println(jb.y.yes.hashCode());
+		System.out.println(jb.y.yes==ch.y.yes);
+		jb.y.yes=true;
+		System.out.println(jb.y.yes==ch.y.yes);
 		System.out.println(jb.y.yes==ch.y.yes);
 		Boolean a=true;
 		System.out.println(a.hashCode());
@@ -58,7 +58,7 @@ class Student implements Comparable<Student>,Cloneable{
 	
 }
 class have implements Cloneable{
-	public Boolean yes;
+	public boolean yes;
 	public have(Boolean yes) {
 		this.yes=new Boolean(yes);
 	}

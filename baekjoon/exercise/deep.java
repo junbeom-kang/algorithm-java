@@ -8,6 +8,13 @@ public class deep {
 		System.out.println(ch.L);
 		System.out.println(jb.L);
 		System.out.println(jb.L==ch.L);
+		int a=11;
+		int b=11;
+		System.out.println(a==b);
+		b=12;
+		System.out.println(a==b);
+		b=11;
+		System.out.println(a==b);
 	}
 
 }
