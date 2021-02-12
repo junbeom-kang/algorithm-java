@@ -1,70 +1,57 @@
+import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 public class exam {
 	public static void main(String[] args) throws CloneNotSupportedException  {
-		Student jb=new Student("준범",30,new have(true));
-		Student ch=jb.clone();
-		System.out.println(jb==ch);
-		System.out.println(jb.y.yes==ch.y.yes);
-		jb.y.yes=true;
-		System.out.println(jb.y.yes==ch.y.yes);
-		jb.y.yes=true;
-		System.out.println(jb.y.yes==ch.y.yes);
-		System.out.println(jb.y.yes==ch.y.yes);
-		Boolean a=true;
-		System.out.println(a.hashCode());
-		boolean b=true;
+		Student a=new Student("준범",26);
+		Student b=new Student("준범",26);
+		HashSet<Student> H=new HashSet<>();
+		H.add(a);
+		H.add(b);
 		System.out.println(a==b);
-		
-
+		System.out.println(a.equals(b));
+		Iterator<Student> I=H.iterator();
+		while(I.hasNext()){
+			System.out.println(I.next());
+		}
+		System.out.println();
+		String s=new String("sex");
+		String v="sex";
+		System.out.println(s==v);
 }
 }
 
-class Student implements Comparable<Student>,Cloneable{
+class Student {
+
 	public String name;
 	public Integer num;
-	public have y;
+
 	
-	public Student(String name,int num,have y){
+
+	public Student(String name,int num){
 		this.name=name;
 		this.num=num;
-		this.y=y;
 	}
 	public int getnum() {
 		return this.num;
 	}
 	@Override
-	public int compareTo(Student student) {
-		if (this.num>student.num) {
-			return 1;
+	public boolean equals(Object obj) {
+		Student n=(Student) obj;
+		if (this.name==n.name &&this.num==n.num) {
+			return true;
 		}
-		else if (this.num<student.num) {
-			return -1;
-		}
-		else {
-			return 0;
-		}
+		else return false;
 	}
-	public String print() {
-		return this.name+"이는 "+this.num;
-	}
-	public void setnum(int n) {
-		this.num=n;
-	}
-	@Override 
-	protected Student clone() throws CloneNotSupportedException {
-		Student student = (Student) super.clone();  
-		student.y=(have)y.clone();
-		return student; 
-		}
 	
-}
-class have implements Cloneable{
-	public boolean yes;
-	public have(Boolean yes) {
-		this.yes=new Boolean(yes);
-	}
 	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		return super.clone();
+	public int hashCode() {
+		final int PRIME = 31;
+	    int result = 1;
+	    result=name.hashCode()+num;
+	    return result;
 	}
-}
+	
+	}
 
