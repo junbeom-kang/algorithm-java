@@ -16,6 +16,7 @@ public class 숫자야구 {
 			else System.out.println(String.format("%dS %dB",temp[0],temp[1]));
 		}
 	}
+	//난수생성
 	public static int[] makeNum() {
 		int [] number=new int[4];
 		Random random=new Random();
@@ -37,6 +38,7 @@ class num{
 	public num(int [] nums) {
 		this.nums=nums;
 	}
+	//S와 B계산 후 return
 	public int [] checknum(String n){
 		int s=0;
 		int b=0;
