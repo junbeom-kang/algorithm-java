@@ -6,10 +6,11 @@ public class ¹æ¹øÈ£_1475 {
 		String temp=sc.next();
 		int [] arr=new int [10];
 		for (int i=0;i<temp.length();i++) {
-			arr[temp.charAt(i)]++;
+			arr[temp.charAt(i)-48]++;
 		}
 		int max=0;
-		double t=Math.ceil(arr[6]+arr[9]);
+		int t=(int)Math.ceil((float)(arr[6]+arr[9])/2);
+		System.out.println((float)(arr[6]+arr[9])/2.0);
 		for (int i=0;i<9;i++) {
 			if (i==6) continue;
 			if (arr[i]>max) max=arr[i];
