@@ -10,7 +10,6 @@ public class ¹æ¹øÈ£_1475 {
 		}
 		int max=0;
 		int t=(int)Math.ceil((float)(arr[6]+arr[9])/2);
-		System.out.println((float)(arr[6]+arr[9])/2.0);
 		for (int i=0;i<9;i++) {
 			if (i==6) continue;
 			if (arr[i]>max) max=arr[i];
