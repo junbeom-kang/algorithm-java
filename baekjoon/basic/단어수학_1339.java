@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class 단어수학_1339 {
-    public static void main(String[] args) {//psvm
+    public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
         int n=sc.nextInt();
         int ans=0;
