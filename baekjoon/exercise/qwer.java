@@ -10,10 +10,8 @@ public class qwer {
 	}
 
 	public static void main(String[] args) {
-		qwer hc1 = new qwer();
-		qwer hc2 = new qwer();
-		a.P();
-		a.P();
+		char[] s = new char[]{80, 'B'+1};
+		System.out.println(s);
 	}
 }
 class a{
