@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
 public class qwer {
 
 	// static 변수로 실행했을 때와 일반 변수로 실행했을 때의 차이점 깨닫기!
@@ -10,8 +14,9 @@ public class qwer {
 	}
 
 	public static void main(String[] args) {
-		char[] s = new char[]{80, 'B'+1};
-		System.out.println(s);
+		ArrayList<Integer> a=new ArrayList<>(Arrays.asList(1,2,3,-1));
+		Collections.sort(a);
+		System.out.println(a);
 	}
 }
 class a{
