@@ -1,5 +1,5 @@
 package Adapter;
 
-public interface WebRequester {
-    void 
+public interface Requester {
+    void charge();
 }

@@ -1,2 +1,5 @@
-package Proxy;public interface Service {
+package Proxy;
+
+public interface Service {
+    void hi();
 }

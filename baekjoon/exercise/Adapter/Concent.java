@@ -1,2 +1,5 @@
-package Adapter;public interface concent {
+package Adapter;
+
+public interface Concent {
+    void charge();
 }

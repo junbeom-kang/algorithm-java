@@ -18,6 +18,11 @@ public class qwer {
 		Collections.sort(a);
 		System.out.println(a);
 	}
+	public static String add(String a, String b) {
+
+		return a+b;
+	}
+
 }
 class a{
 	static int q=3;
