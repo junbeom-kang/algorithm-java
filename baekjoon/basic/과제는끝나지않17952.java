@@ -15,21 +15,42 @@ public class 과제는끝나지않17952 {
                 work.push(new Work(Integer.parseInt(s[1]),Integer.parseInt(s[2])));
             }
             if (!work.isEmpty()) {
-                work.peek().day-=1;
-                if (work.peek().day == 0) {
-                    ans+=work.pop().score;
+                work.peek().setDay(work.peek().getDay()-1);
+                if (work.peek().getDay() == 0) {
+                    ans+=work.pop().getScore();
                 }
             }
-
         }
         System.out.println(ans);
+        Work s=new Work(3,3);
+        s.say();
     }
-    static class Work{
-        public int score;
-        public int day;
-        public Work(int score, int day) {
-            this.score = score;
-            this.day = day;
-        }
+}
+class Work{
+    private int score;
+    private int day;
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    public Work(int score, int day) {
+        this.score = score;
+        this.day = day;
+    }
+    public void say() {
+        System.out.println("TTTT");
     }
 }
