@@ -12,8 +12,11 @@ public class 카드정렬하기_1715 {
         for (int i = 0; i < n; i++) {
             priorityQueue.add(Integer.parseInt(br.readLine()));
         }
-        while (priorityQueue.size()!=1)
-        int temp=priorityQueue.poll()+priorityQueue.poll();
+        while (priorityQueue.size()!=1){
+            int temp=priorityQueue.poll()+priorityQueue.poll();
+            priorityQueue.add(temp);
+            ans+=temp;
+        }
         System.out.println(ans);
         
 
