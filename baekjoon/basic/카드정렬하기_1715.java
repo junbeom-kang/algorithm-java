@@ -22,6 +22,5 @@ public class 카드정렬하기_1715 {
             }
             System.out.println(ans);
         }
-
     }
 }
