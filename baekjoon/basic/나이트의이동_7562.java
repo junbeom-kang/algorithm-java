@@ -17,7 +17,7 @@ public class 나이트의이동_7562 {
         }
         System.out.println(sb);
     }
-    public static int BFS(int i,int y,int x,int Y,int X) {
+    static int BFS(int i,int y,int x,int Y,int X) {
         boolean[][] check = new boolean[i][i];
         check[y][x]=true;
         Queue<q> Q=new LinkedList<>();
