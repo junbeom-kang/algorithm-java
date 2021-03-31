@@ -2,15 +2,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-public class Test{
+public class Test111111{
     public static void main(String[] args) {
-        System.out.println("hi");
         ArrayList<test> A = new ArrayList<>();
         A.add(new test(3));
         A.add(new test(-1));
         A.add(new test(7));
         Collections.sort(A);
-        System.out.println(A.toString());
+        System.out.println(A);
 
     }
 }
@@ -30,5 +29,12 @@ class test implements Comparable<test>{
             return 1;
         }
 
+    }
+
+    @Override
+    public String toString() {
+        return "test{" +
+                "count=" + count +
+                '}';
     }
 }

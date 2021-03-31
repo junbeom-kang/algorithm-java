@@ -42,9 +42,9 @@ public class 나이트의이동_7562 {
     }
 }
 class q {
-    public int y;
-    public int x;
-    public int count;
+    int y;
+    int x;
+    int count;
     public q(int y,int x,int count) {
         this.y=y;
         this.x=x;
