@@ -1,40 +1,28 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
-
-public class Test111111{
+public class Test111111 {
+    static StringBuilder sb=new StringBuilder();
     public static void main(String[] args) {
-        ArrayList<test> A = new ArrayList<>();
-        A.add(new test(3));
-        A.add(new test(-1));
-        A.add(new test(7));
-        Collections.sort(A);
-        System.out.println(A);
-
-    }
-}
-class test implements Comparable<test>{
-    int count;
-    public test(int count) {
-        this.count=count;
-    }
-
-    @Override
-    public int compareTo(test test) {
-        if (this.count < test.count) {
-            return -1;
-        } else if (this.count == test.count) {
-            return 0;
-        } else {
-            return 1;
+        int[] arr = new int[]{1, 2, 3, 4, 5, 6, 7};
+        boolean[] visited = new boolean[arr.length];
+        for (int i = 1; i < arr.length+1; i++) {
+            comb(arr,visited, 0, arr.length,0, i);
         }
+        System.out.println(sb);
 
     }
-
-    @Override
-    public String toString() {
-        return "test{" +
-                "count=" + count +
-                '}';
+    static void comb(int[] arr,boolean[] visited,int start,int length,int count,int r) {
+        if (count == r) {
+            for (int i = 0; i < arr.length; i++) {
+                if (visited[i]) {
+                    sb.append(arr[i]+" ");
+                }
+            }
+            sb.append("\n");
+            return;
+        }
+        for (int i = start; i < length; i++) {
+            visited[i]=true;
+            comb(arr,visited,i+1,length,count+1,r);
+            visited[i]=false;
+        }
     }
 }
