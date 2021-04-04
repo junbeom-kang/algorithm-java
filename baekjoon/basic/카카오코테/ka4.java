@@ -1,5 +1,7 @@
 package 카카오코테;
 
+import java.util.Arrays;
+
 public class ka4 {
     static int[] visited;
     static int max = 0;
@@ -14,15 +16,19 @@ public class ka4 {
     public static int solution(int[][] needs, int r) {
         int n = needs[0].length;
         visited = new int[n];
-        b = new int[needs.length+1];
+        b = new int[needs.length];
         for (int i = 0; i < needs.length; i++) {
             for (int j = 0; j < n; j++) {
-                b[i] += 1 << j;
+                if (needs[i][j]==1) {
+                    b[i] += 1 << (n-j-1);
+
+                }
             }
         }
 
         comb(needs, 0, n, 0, r);
         System.out.println(max);
+        System.out.println(Arrays.toString(b));
         return max;
 
     }
@@ -51,9 +57,10 @@ public class ka4 {
             if ((s & check) == check) {
                 temp += 1;
             }
-            if (max < temp) {
-                max = temp;
-            }
+
+        }
+        if (max < temp) {
+            max = temp;
         }
     }
 }
