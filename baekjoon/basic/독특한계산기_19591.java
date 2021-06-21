@@ -4,11 +4,11 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class 독특한계산기_19591 {
-    static int f1,f2,l1,l2;
+    static Long f1,f2,l1,l2;
     static char s1,s2;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        Deque<Integer> num=new LinkedList<>();
+        Deque<Long> num=new LinkedList<>();
         Deque<Character> sign=new LinkedList<>();
         List<Character> operator = Arrays.asList('+', '/', '*', '-');
         HashMap<Character,Boolean> map=new HashMap<>();
@@ -22,13 +22,13 @@ public class 독특한계산기_19591 {
         for (int i = 0; i < s.length(); i++) {
             if (operator.contains(s.charAt(i)) && i!=0) {
                 sign.add(s.charAt(i));
-                num.add(Integer.parseInt(s.substring(beforeIndex,i)));
+                num.add(Long.valueOf(s.substring(beforeIndex,i)));
                 beforeIndex = i+1;
             }
         }
-        num.add(Integer.parseInt(s.substring(beforeIndex)));
+        num.add(Long.valueOf(s.substring(beforeIndex)));
         if (sign.size() == 0) {
-            System.out.println(Integer.parseInt(s)/1);
+            System.out.println(Long.valueOf(s)/1);
         } else {
             while (sign.size() >= 2) {
                 s1=sign.pollFirst();
@@ -46,7 +46,7 @@ public class 독특한계산기_19591 {
                         l2 = num.pollLast();
                     }
 
-                    if (cal(f1, f2, s1) > cal(l1, l2, s2)) {
+                    if (cal(f1, f2, s1) >= cal(l2, l1, s2)) {
                         num.addLast(l2);
                         num.addLast(l1);
                         num.addFirst(cal(f1, f2, s1));
@@ -54,7 +54,7 @@ public class 독특한계산기_19591 {
                     } else {
                         num.addFirst(f2);
                         num.addFirst(f1);
-                        num.addLast(cal(l1, l2, s2));
+                        num.addLast(cal(l2, l1, s2));
                         sign.addFirst(s1);
                     }
                 } else if (map.get(s1) == Boolean.TRUE) {
@@ -65,7 +65,7 @@ public class 독특한계산기_19591 {
                 } else {
                     l1 = num.pollLast();
                     l2 = num.pollLast();
-                    num.addLast(cal(l1, l2, s2));
+                    num.addLast(cal(l2, l1, s2));
                     sign.addFirst(s1);
                 }
             }
@@ -74,7 +74,7 @@ public class 독특한계산기_19591 {
 
 
     }
-    static int cal(int a, int b, char c) {
+    static Long cal(Long a, Long b, char c) {
         if(c=='*') {
             return a*b;
         }else if(c=='/') {
