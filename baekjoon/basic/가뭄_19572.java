@@ -15,7 +15,7 @@ public class °¡¹³_19572 {
         e=b-f;
         if (d > 0 && e > 0 && f > 0) {
             System.out.println(1);
-            System.out.println(String.format("%.1f %.1f %.1f", d, e, f));
+            System.out.println(String.format("%.1f %.1f %.1f", e, d, f));
         } else {
             System.out.println(-1);
         }
