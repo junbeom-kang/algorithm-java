@@ -9,11 +9,10 @@ public class 난개발_19584 {
     static StringTokenizer st;
     static HashMap<Integer, Long> plus = new HashMap<>();
     static HashMap<Integer, Long> minus = new HashMap<>();
-    static ArrayList<Integer> sort;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        HashSet<Integer> Hs = new HashSet<>();
+        TreeSet<Integer> Hs = new TreeSet<>();
         Long big=0L;
         Long ans=0L;
         st = new StringTokenizer(br.readLine());
@@ -35,9 +34,7 @@ public class 난개발_19584 {
                 minus.put(arr[Integer.parseInt(s[0])], minus.getOrDefault(arr[Integer.parseInt(s[0])], 0L) + Long.parseLong(s[2]));
             }
         }
-        sort = new ArrayList(Hs);
-        Collections.sort(sort);
-        for (Integer t : sort) {
+        for (Integer t : Hs) {
             big += plus.getOrDefault(t, 0L);
             if (ans <=big) {
                 ans=big;
