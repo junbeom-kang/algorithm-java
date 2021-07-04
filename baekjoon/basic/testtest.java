@@ -8,7 +8,10 @@ public class testtest {
 
 
     public static void main(String[] args) throws IOException {
-        test();
+        sb = new StringBuilder("hello");
+        StringBuilder sb1 = new StringBuilder("hello");
+
+        System.out.println(sb.toString().equals(sb1.toString()));
     }
 
     private static void test() throws NumberFormatException, IOException {
