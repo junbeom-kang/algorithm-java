@@ -7,7 +7,7 @@ public class webtoon_2 {
     static StringBuilder pre = new StringBuilder();
     static StringBuilder suf = new StringBuilder();
     public static void main(String[] args) {
-        System.out.println(solution("abcxyqwerabcxy"));
+        System.out.println(solution("xyqwcgrtqxy"));
     }
     public static String[] solution(String s) {
         int ls = s.length();
@@ -21,7 +21,7 @@ public class webtoon_2 {
             System.out.println(i);
             pre.append(s.charAt(i));
             suf.insert(0, s.charAt(j));
-            if (pre.toString().equals(suf.toString())) {
+            if (pre.toString().equals(suf.toString())&& pre.toString().length()!=0) {
                 if (j > i) {
                     first.add(pre);
                     second.add(suf);
@@ -31,10 +31,10 @@ public class webtoon_2 {
                     first.add(pre);
                     break gg;
                 }
-                i+=1;
-                j-=1;
-            }
 
+            }
+            i+=1;
+            j-=1;
         }
         System.out.println(first.toString());
         System.out.println(second.toString());
