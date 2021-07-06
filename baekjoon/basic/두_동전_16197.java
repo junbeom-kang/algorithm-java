@@ -6,112 +6,82 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class µÎ_µ¿Àü_16197 {
-    static Queue<set> Q = new LinkedList<>();
-    static int[] dx = {0, 0, -1, 1};
-    static int[] dy = {1, -1, 0, 0};
-    static ArrayList<int []> o = new ArrayList<>();
-    static set poll;
+    static Queue<int[]> Q = new LinkedList<>();
+    static int[] dx = {0, 0, -1, 1}, dy = {1, -1, 0, 0},poll;
+    static ArrayList<int[]> o = new ArrayList<>();
     static char[][] arr;
-    static int ans,n,m;
-    static Pair q, w;
+    static int ans, n, m;
+    static boolean t1,t2;
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        boolean can=false;
+        boolean can = false;
         String[] s = br.readLine().split(" ");
         n = Integer.parseInt(s[0]);
         m = Integer.parseInt(s[1]);
         arr = new char[n][m];
+        boolean[][][][] visited = new boolean[n][m][n][m];
         for (int i = 0; i < n; i++) {
-            String temp = br.readLine();
+            char[] temp = br.readLine().toCharArray();
             for (int j = 0; j < m; j++) {
-                if (temp.charAt(j) == 'o') {
+                if (temp[j] == 'o') {
                     o.add(new int[]{i, j});
                 }
-                arr[i][j] = temp.charAt(j);
+                arr[i][j] = temp[j];
             }
         }
-        Q.add(new set(new Pair(o.get(0)[0], o.get(0)[1]),new Pair(o.get(1)[0], o.get(1)[1])));
-        gg:while (!Q.isEmpty()) {
+        Q.add(new int[]{o.get(0)[0], o.get(0)[1], o.get(1)[0], o.get(1)[1]});
+        visited[o.get(0)[0]][o.get(0)[1]][o.get(1)[0]][o.get(1)[1]] = true;
+        ans=1;
+        gg:
+        while (!Q.isEmpty()) {
             if (ans > 10) {
                 break;
             }
-            int lQ=Q.size();
-            for (int j = 0; j <lQ; j++) {
+            int lQ = Q.size();
+            for (int j = 0; j < lQ; j++) {
                 poll = Q.poll();
-                int t=checkValue(poll);
-                if (t==1) {
-                    can=true;
-                    break gg;
-                } else if (t == 0) {
-                    for (int i = 0; i < 4; i++) {
-                        int fx = poll.first.column + dx[i];
-                        int fy = poll.first.row + dy[i];
-                        int sx = poll.second.column + dx[i];
-                        int sy = poll.second.row + dy[i];
-                        q=checkMap(fx,fy,i);
-                        w=checkMap(sx,sy,i);
-                        if (!q.equals(w) && !(q.equals(poll.first) && w.equals(poll.second))) {
-                            Q.add(new set(q, w));
+                for (int i = 0; i < 4; i++) {
+                    t1 = checkValue(poll[0] + dx[i], poll[1] + dy[i]);
+                    t2 = checkValue(poll[2] + dx[i], poll[3] + dy[i]);
+                    if ((!t1 && t2) || (t1 && !t2)) {
+                        can=true;
+                        break gg;
+                    } else if (t1 && t2) {
+                        int []t1=checkRock(poll[0] + dx[i], poll[1] + dy[i],i);
+                        int []t2=checkRock(poll[2] + dx[i], poll[3] + dy[i],i);
+                        if (!visited[t1[0]][t1[1]][t2[0]][t2[1]]) {
+                            visited[t1[0]][t1[1]][t2[0]][t2[1]]=true;
+                            Q.add(new int[]{t1[0], t1[1], t2[0], t2[1]});
+
                         }
+
+                    }
                 }
             }
-            }
-            ans+=1;
+            ans += 1;
+
         }
         if (can) {
             System.out.println(ans);
         } else {
             System.out.println(-1);
         }
-    }
 
-    static public Pair checkMap(int x,int y, int d) {
-        if ((x>=0 && x<n && y>=0 && y<m) && arr[x][y] == '#') {
-            return new Pair(x - dx[d], y - dy[d]);
+    }
+    public static boolean checkValue(int i, int j) {
+        if(i>=0 && j>=0 && i<n && j<m) {
+            return true;
+        }else
+            return false;
+    }
+    public static int[] checkRock(int i, int j,int d) {
+        if (arr[i][j] == '#') {
+            return new int[]{i - dx[d], j - dy[d]};
         } else {
-            return new Pair(x, y);
-        }
-    }
-
-    static public int checkValue(set set) {
-        int r=0;
-        if (set.first.column < 0 || set.first.column >= n || set.first.row < 0 || set.first.row >= m) {
-            r+=1;
-        }
-        if (set.second.column < 0 || set.second.column >= n || set.second.row < 0 || set.second.row >= m) {
-            r+=1;
-        }
-        return r;
-    }
-
-
-    static class Pair {
-        @Override
-        public boolean equals(Object obj) {
-            Pair p=(Pair)obj;
-            if (p.row == this.row && p.column == this.column) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        public Pair(int column, int row) {
-            this.column = column;
-            this.row = row;
-        }
-
-        int column;
-        int row;
-    }
-
-    static class set {
-        Pair first;
-        Pair second;
-
-        public set(Pair first, Pair second) {
-            this.first = first;
-            this.second = second;
+            return new int[]{i, j};
         }
     }
 }
+
+
