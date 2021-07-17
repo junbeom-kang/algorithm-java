@@ -1,61 +1,128 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.PriorityQueue;
+import java.util.StringTokenizer;
 
 public class testtest {
-    private static InputReader in = new InputReader(System.in);
-    private static StringTokenizer st;
-    private static StringBuilder sb= new StringBuilder();
+    private static final String NEW_LINE = "\n";
 
+    private static int[] parent;
+    private static int[] result;
 
-    public static void main(String[] args) throws IOException {
-        sb = new StringBuilder("hello");
-        StringBuilder sb1 = new StringBuilder("hello");
+    private static class Node implements Comparable<Node>{
+        int from;
+        int to;
+        int usado;
 
-        System.out.println(sb.toString().equals(sb1.toString()));
-    }
+        public Node(int from, int to, int usado) {
+            this.from = from;
+            this.to = to;
+            this.usado = usado;
+        }
 
-    private static void test() throws NumberFormatException, IOException {
-        int S = in.nextInt();
-        int[] cache = new int[2000];
-        Arrays.fill(cache, Integer.MAX_VALUE);
-        cache[1] = 0;
-        dp(cache, S);
-        System.out.println(cache[S]);
-    }
-
-    static void dp(int[] cache, int num) {
-        for(int i = 1; i <= num ; i++) {
-            int cnt = cache[i];
-            for(int j = i; cache[num] >= cnt + j-num; j += i) {
-                cnt ++;
-                if(cache[j] <= cnt)
-                    continue;
-                int t = j;
-                int tmp = cnt;
-                while(cache[t] > tmp)
-                    cache[t--] = tmp++;
-            }
+        @Override
+        public int compareTo(Node n) {
+            return this.usado > n.usado ? -1: 1;
         }
     }
 
-}
+    private static class Query implements Comparable<Query>{
+        int index;
+        int usado;
+        int video;
 
-class InputReader extends BufferedReader {
-    private StringTokenizer st;
+        public Query(int index, int usado, int video) {
+            this.index = index;
+            this.usado = usado;
+            this.video = video;
+        }
 
-    public InputReader(InputStream in) {
-        super(new InputStreamReader(in));
+        @Override
+        public int compareTo(Query q) {
+            return this.usado > q.usado ? -1: 1;
+        }
     }
 
-    public int nextInt() throws IOException {
-        if (st == null || !st.hasMoreTokens())
-            st = new StringTokenizer(readLine());
-        return Integer.parseInt(st.nextToken());
+    public static void main(String[] args) throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int N = Integer.parseInt(st.nextToken());
+        int Q = Integer.parseInt(st.nextToken());
+
+        init(N);
+
+        Node[] link = new Node[N - 1];
+
+        for(int i = 0; i < N - 1; i++) {
+            st = new StringTokenizer(br.readLine());
+            int p = Integer.parseInt(st.nextToken()) - 1;
+            int q = Integer.parseInt(st.nextToken()) - 1;
+            int r = Integer.parseInt(st.nextToken());
+
+            link[i] = new Node(p, q, r);
+        }
+
+        PriorityQueue<Query> quest = new PriorityQueue<>();
+        result = new int[Q];
+
+        for(int i = 0; i < Q; i++) {
+            st = new StringTokenizer(br.readLine());
+            quest.offer(new Query(i, Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()) - 1));
+        }
+
+        makeResult(N, link, quest);
+
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < result.length; i++) {
+            sb.append(result[i]).append(NEW_LINE);
+        }
+
+        System.out.println(sb);
     }
 
-    public int nextInt(String delimiter) throws IOException {
-        if (st == null || !st.hasMoreTokens())
-            st = new StringTokenizer(readLine(), delimiter);
-        return Integer.parseInt(st.nextToken());
+    private static void init(int n) {
+        parent = new int[n];
+
+        for(int i = 0; i < n; i++) {
+            parent[i] = -1;
+        }
+    }
+
+    private static int find(int x) {
+        if(parent[x] < 0) return x;
+        return parent[x] = find(parent[x]);
+    }
+
+    private static void merge(int x, int y) {
+        x = find(x);
+        y = find(y);
+
+        if(x == y) return;
+
+        if(parent[x] < parent[y]) {
+            parent[x] += parent[y];
+            parent[y] = x;
+        }
+        else {
+            parent[y] += parent[x];
+            parent[x] = y;
+        }
+    }
+
+    private static void makeResult(int n, Node[] arr, PriorityQueue<Query> pq) {
+        int next = 0;
+        Arrays.sort(arr);
+
+        while(!pq.isEmpty()) {
+            Query current = pq.poll();
+
+            for(; next < n - 1; next++) {
+                if(arr[next].usado >= current.usado) merge(arr[next].to, arr[next].from);
+                else break;
+            }
+
+            result[current.index] = parent[find(current.video)] == -1 ? 0: -parent[find(current.video)] - 1;
+        }
     }
 }
