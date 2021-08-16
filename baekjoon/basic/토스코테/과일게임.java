@@ -1,7 +1,11 @@
 package 토스코테;
 
+import java.nio.file.DirectoryStream;
+import java.time.Instant;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.TreeSet;
+import java.util.function.DoubleBinaryOperator;
 
 public class 과일게임 {
     static TreeSet<Integer> hs = new TreeSet<>();

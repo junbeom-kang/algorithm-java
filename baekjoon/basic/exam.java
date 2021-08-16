@@ -1,57 +1,25 @@
-import java.util.Iterator;
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.StringTokenizer;
 public class exam {
-	public static void main(String[] args) throws CloneNotSupportedException  {
-		Student a=new Student("준범",26);
-		Student b=new Student("준범",26);
-		HashSet<Student> H=new HashSet<>();
-		H.add(a);
-		H.add(b);
-		System.out.println(a==b);
-		System.out.println(a.equals(b));
-		Iterator<Student> I=H.iterator();
-		while(I.hasNext()){
-			System.out.println(I.next());
+	public static void main(String args[]) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int n,k,c,i;
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		k = Integer.parseInt(st.nextToken());
+		int[] dp = new int[k+1];
+		st = new StringTokenizer(br.readLine());
+		Arrays.fill(dp, 1000000000);
+		dp[0] = 0;
+		while(n-->0) {
+			c = Integer.parseInt(st.nextToken());
+			for(i=k;i>=c;i--) dp[i] = Math.min(dp[i], dp[i-c]+1);
 		}
-		System.out.println();
-		String s=new String("sex");
-		String v="sex";
-		System.out.println(s==v);
+		System.out.println(dp[k]>100?"-1":dp[k]);
 }
 }
 
-class Student {
-
-	public String name;
-	public Integer num;
-
-	
-
-	public Student(String name,int num){
-		this.name=name;
-		this.num=num;
-	}
-	public int getnum() {
-		return this.num;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		Student n=(Student) obj;
-		if (this.name==n.name &&this.num==n.num) {
-			return true;
-		}
-		else return false;
-	}
-	
-	@Override
-	public int hashCode() {
-		final int PRIME = 31;
-	    int result = 1;
-	    result=name.hashCode()+num;
-	    return result;
-	}
-	
-	}
 
