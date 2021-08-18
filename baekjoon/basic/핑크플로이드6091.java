@@ -1,10 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.PriorityQueue;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class 핑크플로이드6091 {
     static int arr[][],big,start,cnt,n;
@@ -13,6 +10,7 @@ public class 핑크플로이드6091 {
     static PriorityQueue<vertex> pq = new PriorityQueue<>();
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
         n = Integer.parseInt(br.readLine());
         for (int i = 0; i < n; i++) {
             ans.add(i, new ArrayList<>());
@@ -31,19 +29,32 @@ public class 핑크플로이드6091 {
                 arr[j][i]=arr[i][j];
             }
         }
-        pq.add(new vertex(start,start,0));
-        DFS(start);
+        System.out.println(start);
+        pq.add(new vertex(start,find(start),0));
+        check[start]=true;
+        DFS();
+        for (ArrayList<Integer> an : ans) {
+            sb.append(an.size()+" ");
+            Collections.sort(an);
+            for (Integer integer :an) {
+                sb.append(integer+1+" ");
+            }
+            sb.append("\n");
+        }
+        System.out.println(sb.toString());
 
     }
-    public static void DFS(int v) {
-        while (cnt != n) {
+    public static void DFS() {
+        while (cnt != n-1) {
             vertex poll = pq.poll();
             if (!check[poll.v]) {
-                ans.get(poll.before).add(v);
+                System.out.println(String.format("%d %d",poll.before+1,poll.v+1));
+                ans.get(poll.before).add(poll.v);
+                ans.get(poll.v).add(poll.before);
                 check[poll.v]=true;
                 cnt+=1;
                 for (int i = 0; i < n; i++) {
-                    if (i != poll.v|| !check[v]) {
+                    if (i != poll.v|| !check[i]) {
                         pq.add(new vertex(poll.v, i, arr[poll.v][i]));
                     }
                 }
@@ -53,14 +64,16 @@ public class 핑크플로이드6091 {
     }
 
     public static int find(int v) {
-        int m=15001;
+        int a=0;
+        int m=Integer.MAX_VALUE;
         for (int i = 0; i < n; i++) {
             if (check[i]|| i==v) continue;
             if (arr[v][i] < m) {
                 m=arr[v][i];
+                a=i;
             }
         }
-        return m;
+        return a;
     }
 
     static class vertex implements Comparable<vertex>{
