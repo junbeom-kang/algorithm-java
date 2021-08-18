@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.PriorityQueue;
 
-public class 창영이와퇴근BFS {
+public class 창영이와퇴근PQ {
     static int arr[][], n,ans;
     static boolean[][] check;
     static int dx[] ={0, 0, 1, -1};
