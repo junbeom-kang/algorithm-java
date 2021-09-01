@@ -1,5 +1,6 @@
 package 카카오코테;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Stack;
 
@@ -47,6 +48,7 @@ public class 인턴십_2021_3 {
         }
         String answer = String.valueOf(c);
         System.out.println(stack.get(0));
+
         return answer;
     }
 
