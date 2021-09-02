@@ -4,9 +4,8 @@ import java.util.Arrays;
 import java.util.Stack;
 
 public class 표편집 {
-    static Stack<pair> stack = new Stack<pair>();
+    static Stack<Integer> stack = new Stack<Integer>();
     public static void main(String[] args) {
-        //System.out.println(solution(8,2,new String[] {"D 2","C","U 3","C","D 4","C","U 2","Z","Z"}));
         System.out.println(solution(8,2,new String[] {"D 2","C","U 3","C","D 4","C","U 2","Z","Z","U 1","C"}));
 
     }
@@ -22,7 +21,7 @@ public class 표편집 {
         for (String s : cmd) {
             if (s.length()==1) {
                 if (s.equals("C")) {
-                    stack.add(new pair(pre_array[c],next_array[c],c));
+                    stack.add(c);
                     if (pre_array[c] != -1) {
                         next_array[pre_array[c]]=next_array[c];
                     }
@@ -36,14 +35,14 @@ public class 표편집 {
                         c=next_array[c];
                     }
                 } else {
-                    pair pop = stack.pop();
-                    if (pop.next != n) {
-                        pre_array[pop.next]=pop.num;
+                    Integer pop = stack.pop();
+                    if (next_array[pop] != n) {
+                        pre_array[next_array[pop]]=pop;
                     }
-                    if (pop.pre != -1) {
-                        next_array[pop.pre]=pop.num;
+                    if (pre_array[pop] != -1) {
+                        next_array[pre_array[pop]]=pop;
                     }
-                    ans[pop.num]=false;
+                    ans[pop]=false;
 
                 }
 
@@ -72,17 +71,5 @@ public class 표편집 {
         return answer;
     }
 
-    static class pair {
-        int pre;
-        int next;
-        int num;
-
-        public pair(int pre, int next, int num) {
-            this.pre = pre;
-            this.next = next;
-            this.num = num;
-        }
-
-    }
 
 }
