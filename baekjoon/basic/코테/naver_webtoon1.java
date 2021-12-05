@@ -1,7 +1,6 @@
-package 네이버웹툰코테;
+package 코테;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 public class naver_webtoon1 {
     public static void main(String[] args) {

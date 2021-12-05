@@ -1,5 +1,5 @@
-package 네이버웹툰코테;
-import java.util.*;
+package 코테;
+
 public class webtoon_3 {
     public static void main(String[] args) {
         System.out.println(solution(new String("ABC ABCDAB ABCDABCDABD"),"ABCDABD"));
