@@ -17,13 +17,14 @@ public class ÄÜ¼¾Æ®_23843 {
         }
         Arrays.sort(arr);
         PriorityQueue<Integer> pq = new PriorityQueue<>();
-        int answer=0;
+        int answer=arr[n-1];
         if (n > m) {
             for (int i = 0; i < m; i++) {
                 pq.add(arr[n - 1 - i]);
             }
             for (int i = 0; i < n-m; i++) {
-                int res = pq.poll()+arr[n-m-1-i];
+                int tt=pq.poll();
+                int res = tt+arr[n-m-1-i];
                 pq.add(res);
                 answer= Math.max(res, answer);
             }
