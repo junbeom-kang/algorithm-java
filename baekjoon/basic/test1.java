@@ -1,38 +1,30 @@
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.PriorityQueue;
 
-public class test1 {
+public class test1 implements Bank{
+
+    @Override
+    public void withDraw(int price) {
+    }
+
+    @Override
+    public void deposit(int price) {
+
+    }
+
     public static void main(String[] args) {
-        PriorityQueue<temp> pq=new PriorityQueue<>(Collections.reverseOrder());
-        pq.add(new temp(3,4));
-        pq.add(new temp(4,15));
-        pq.add(new temp(1,44));
-        System.out.println(pq.toString());
+        Integer t1=3;
+        Integer t2=1;
+        System.out.println(t1);
+        swap(t1,t2);
+        System.out.println(t1);
 
     }
-}
-class temp implements Comparable<temp>{
-    int num;
-    int weight;
+    static void swap(Integer t1,Integer t2) {
 
-    public temp(int num, int weight) {
-        this.num = num;
-        this.weight = weight;
-    }
-
-    @Override
-    public int compareTo(temp o) {
-        return weight-o.weight;
-    }
-
-    @Override
-    public String toString() {
-        return "temp{" +
-                "num=" + num +
-                ", weight=" + weight +
-                '}';
     }
 }
 
