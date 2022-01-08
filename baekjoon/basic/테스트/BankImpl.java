@@ -1,3 +1,7 @@
+package 테스트;
+
+import 테스트.Bank;
+
 public class BankImpl implements Bank {
     @Override
     public void withDraw(int price) {

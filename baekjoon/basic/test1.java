@@ -1,10 +1,10 @@
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.PriorityQueue;
+import Å×½ºÆ®.Bank;
 
-public class test1 implements Bank{
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+
+public class test1 implements Bank {
 
     @Override
     public void withDraw(int price) {
@@ -16,11 +16,12 @@ public class test1 implements Bank{
     }
 
     public static void main(String[] args) {
-        Integer t1=3;
-        Integer t2=1;
-        System.out.println(t1);
-        swap(t1,t2);
-        System.out.println(t1);
+        ArrayList<Integer> arr=new ArrayList<>();
+        for (int i = 10; i >-1; i--) {
+            arr.add(i);
+        }
+        Collections.sort(arr);
+        System.out.println(arr.toString());
 
     }
     static void swap(Integer t1,Integer t2) {

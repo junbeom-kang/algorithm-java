@@ -1,3 +1,5 @@
+package 테스트;
+
 public interface Bank {
 
     //상수 (최대 고객에게 인출해 줄 수 있는 금액 명시)
