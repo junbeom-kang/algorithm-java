@@ -25,11 +25,9 @@ public class a {
             System.out.println(answer);
         }
         System.out.println(answer);
-        int dif=0;
+        int dif=usage;
         if (index >= 1) {
-            dif = usage - fees[index - 1][0];
-        } else {
-            dif=usage;
+            dif -=fees[index - 1][0];
         }
         answer+=fees[index][1]+fees[index][2]*dif;
         System.out.println(answer);

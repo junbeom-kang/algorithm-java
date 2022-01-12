@@ -1,9 +1,6 @@
 import Å×½ºÆ®.Bank;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
+import java.util.*;
 
 public class test1 implements Bank {
 
@@ -17,32 +14,54 @@ public class test1 implements Bank {
     }
 
     public static void main(String[] args) {
-        /*
-        Integer[] arrayOfStrings = {1, 2, 3};
-        String s="123456";
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) < 100) {
-                char c = s.charAt(i);
-                System.out.println(s.charAt(i)-'0');
-                System.out.println(true);
-            }
+        StackQueue q = new StackQueue();
+        q.inQueue(1);
+        q.inQueue(2);
+
+        System.out.println(q.outQueue());
+        System.out.println(q.inqueue);
+        System.out.println(q.outqueue);
+        q.inQueue(3);
+        System.out.println(q.inqueue);
+        System.out.println(q.outqueue);
+        System.out.println(q.outQueue());
+        System.out.println(q.outQueue());
+    }
+    private void go() {
+        System.out.println("Hello");
+        go1();
+    }
+    private void go1() {
+        System.out.println("Hello");
+        go2();
+    }
+    static void go2(){
+        System.out.println("??");
+    }
+
+
+    static class StackQueue{
+        Stack<Integer> inqueue;
+        Stack<Integer> outqueue;
+
+        StackQueue(){
+            this.inqueue = new Stack<>();
+            this.outqueue = new Stack<>();
+
         }
-        String arrayToString = Arrays.toString(arrayOfStrings);
-        System.out.println(s.substring(0,2));
-        */
-        System.out.println(2/3);
 
+        void inQueue(int v){
+            inqueue.add(v);
 
+        }
 
-    }
-    static void swap(Integer t1,Integer t2) {
-
-    }
-    int parseTime(String time){
-        String splitted[] = time.split(":");
-        return Integer.parseInt(splitted[0])*3600
-                + Integer.parseInt(splitted[1])*60
-                + Integer.parseInt(splitted[2]);
+        int outQueue(){
+            if(outqueue.isEmpty())//** point **
+                while(!inqueue.isEmpty()){
+                    outqueue.add(inqueue.pop());
+                }
+            return outqueue.pop();
+        }
     }
 }
 

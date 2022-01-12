@@ -9,24 +9,24 @@ public class b {
     public static int solution(String[][] schedule) {
         answer = 0;
         arr=new boolean[5][30];
-        go(0,0,schedule);
+        go(0,schedule);
         System.out.println(answer);
         return answer;
     }
-    static void go(int v,int cnt,String[][] schedule) {
+    static void go(int cnt,String[][] schedule) {
         if (cnt == 5) {
             answer += 1;
             return;
         } else {
             for (int i = 0; i < 4; i++) {
-                int[] temp=change(schedule[v][i]);
-                if (temp.length > 0) {
+                int[] temp=change(schedule[cnt][i]);
+                if (temp!=null) {
                     if (temp.length == 2) {
                         int start = temp[1] + 1;
                         for (int j = 0; j < 5; j++) {
                             arr[temp[0]][start + j] = true;
                         }
-                        go(v + 1, cnt + 1, schedule);
+                        go( cnt + 1, schedule);
                         for (int j = 0; j < 5; j++) {
                             arr[temp[0]][start + j] = false;
                         }
@@ -37,7 +37,7 @@ public class b {
                             arr[temp[0]][start1 + j] = true;
                             arr[temp[2]][start2 + j] = true;
                         }
-                        go(v+1,cnt+1,schedule);
+                        go(cnt+1,schedule);
                         for (int j = 0; j < 2; j++) {
                             arr[temp[0]][start1 + j] = false;
                             arr[temp[2]][start2 + j] = false;
@@ -56,21 +56,28 @@ public class b {
         if (s.length() > 10) {
             int f2 = setCheck(time[3]);
             int d2 = getdate(time[2]);
+            for (int i = 0; i < 4; i++) {
+                if (arr[d1][i + f1] || arr[d2][i + f2]) {
+                    return null;
+                }
+            }
+            /*
             for (int i = f1; i < f1 + 4; i++) {
                 if (arr[d1][i]) {
-                    return new int[]{};
+                    return null;
                 }
             }
             for (int i = f2; i < f2 + 4; i++) {
                 if (arr[d2][i]) {
-                    return new int[]{};
+                    return null;
                 }
             }
+             */
             return new int[]{d1, f1, d2, f2};
         } else {
             for (int i = f1; i < f1+7; i++) {
                 if (arr[d1][i]) {
-                    return new int[]{};
+                    return null;
                 }
             }
             return new int[]{d1,f1};
